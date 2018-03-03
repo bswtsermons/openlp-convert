@@ -1,0 +1,2 @@
+include ':openlyricj'
+project(':openlyricj').projectDir = new File(settingsDir, '../openlyricj')

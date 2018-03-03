@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+    	body { font-family: Arial; }
+    </style>
+</head>
+<body>
+	<h1>Sermon Notes Conversion</h1>
+	<table>
+		<form action="#" th:action="@{/openlp/convert}" th:object="${convertForm}" method="post">
+		<tr>
+			<td>Sermon name:</td>
+			<td><input th:field="*{name}" /></td>
+		</tr>
+		<tr>
+			<td>Notes:</td>
+			<td><textarea th:field="*{input}" /></td>
+		</tr>
+		<tr>
+			<td/>
+			<td><input type="submit" /></td>
+		</tr>
+		<tr>
+			<td>Upload to Drop Box?</td>
+			<td><input type="checkbox" disabled="disabled" /></td>
+		</tr>
+		<tr>
+			<td>Email to BSWTSermons?</td>
+			<td><input type="checkbox" name="sendEmail" /></td>
+		</tr>
+		</form>
+    </table>
+</body>
+</html>
