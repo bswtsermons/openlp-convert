@@ -10,6 +10,19 @@ public class ConvertForm
 	@NotNull
 	private String input;
 	
+	@NotNull
+	private String minister;
+	
+	public String getMinister()
+	{
+		return minister;
+	}
+
+	public void setMinister(String minister)
+	{
+		this.minister = minister;
+	}
+
 	public String getInput()
 	{
 		return input;
