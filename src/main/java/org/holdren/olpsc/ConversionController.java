@@ -1,8 +1,10 @@
 package org.holdren.olpsc;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.StringReader;
+import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -11,6 +13,8 @@ import javax.xml.bind.JAXBException;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 
+import org.holdren.olpsc.cs.CloudStorageException;
+import org.holdren.olpsc.cs.CloudStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -41,6 +45,9 @@ public class ConversionController
 	
 	@Autowired
 	private ConversionService conversionService;
+
+	@Autowired
+	private CloudStorageService cloudStorageService;
 	
 	@ModelAttribute("convertForm")
 	public ConvertForm getConvertForm()
@@ -57,7 +64,7 @@ public class ConversionController
 	}
 	
 	@PostMapping
-	public Object convert(@Valid ConvertForm convertForm, BindingResult bindingResult) throws IOException, JAXBException, DatatypeConfigurationException
+	public Object convert(@Valid ConvertForm convertForm, BindingResult bindingResult) throws IOException, JAXBException, DatatypeConfigurationException, CloudStorageException
 	{
 		if (bindingResult.hasErrors())
 		{
@@ -77,6 +84,15 @@ public class ConversionController
 			gc.setTime(new Date());
 			song.setModifiedDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(gc));
 			String songXmlString = conversionService.convertLineBreaks(conversionService.convert(song));
+
+			if (convertForm.isUploadToDropBox())
+			{
+				try (ByteArrayInputStream is = new ByteArrayInputStream(songXmlString.getBytes(Charset.forName("UTF-8"))))
+				{
+					cloudStorageService.store(String.format("/%s.xml", convertForm.getName()), is);
+				}
+			}
+
 			return ResponseEntity.ok()
 								 .contentType(MediaType.APPLICATION_XML)
 								 .header(HttpHeaders.CONTENT_DISPOSITION, String.format("attachment; filename=\"%s.xml\"", convertForm.getName()))

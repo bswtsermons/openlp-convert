@@ -14,6 +14,7 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 
+
 group = 'org.holdren'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
@@ -29,8 +30,12 @@ dependencies {
 	compile("org.springframework.boot:spring-boot-devtools")
 	compile 'org.springframework.boot:spring-boot-starter-mail'
 	compile 'org.apache.commons:commons-io:1.3.2'
+	compile 'com.dropbox.core:dropbox-core-sdk:3.0.10'
 	compile group: 'javax.mail', name: 'mail', version: '1.4'
 	compile project(':openlyricj')
+
+	compileOnly 'org.projectlombok:lombok:1.18.6'
+	annotationProcessor 'org.projectlombok:lombok:1.18.6'
 	
 	testCompile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.5'
 	

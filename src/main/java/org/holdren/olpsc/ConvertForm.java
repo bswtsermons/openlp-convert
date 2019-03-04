@@ -1,7 +1,10 @@
 package org.holdren.olpsc;
 
+import lombok.Data;
+
 import javax.validation.constraints.NotNull;
 
+@Data
 public class ConvertForm
 {
 	@NotNull
@@ -12,36 +15,7 @@ public class ConvertForm
 	
 	@NotNull
 	private String minister;
-	
-	public String getMinister()
-	{
-		return minister;
-	}
 
-	public void setMinister(String minister)
-	{
-		this.minister = minister;
-	}
+	private boolean uploadToDropBox;
 
-	public String getInput()
-	{
-		return input;
-	}
-
-	public void setInput(String input)
-	{
-		this.input = input;
-	}
-
-	public String getName()
-	{
-		return name;
-	}
-
-	public void setName(String name)
-	{
-		this.name = name;
-	}
-	
-	
 }
