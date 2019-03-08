@@ -1,14 +1,14 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
+    <title>Sermon Notes to OpenLP Conversion</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <style>
     	body { font-family: Arial; }
     </style>
 </head>
 <body>
-	<h1>Sermon Notes Conversion</h1>
+	<h1>Sermon Notes to OpenLP Conversion</h1>
 	<table>
 		<form action="#" th:action="@{/openlp/convert}" th:object="${convertForm}" method="post">
 		<tr>
@@ -31,10 +31,12 @@
 			<td>Upload to Drop Box?</td>
 			<td><input type="checkbox" name="uploadToDropBox" checked="checked" /></td>
 		</tr>
+                <!--
 		<tr>
 			<td>Email to BSWTSermons?</td>
 			<td><input type="checkbox" name="sendEmail" disabled="disabled" /></td>
 		</tr>
+                -->
 		</form>
     </table>
 </body>
