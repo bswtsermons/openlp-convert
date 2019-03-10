@@ -64,8 +64,7 @@ public class ConversionService
 		Song song = new Song();
 		song.setProperties(properties);
 		song.setLyrics(lyrics);
-		
-		
+
 		return song;
 	}
 	
@@ -75,7 +74,7 @@ public class ConversionService
 		List<String> verseLines = new ArrayList<>();
 		AtomicInteger verseNo = new AtomicInteger(0);
 		
-		String line = null;
+		String line;
 		while ((line = br.readLine()) != null) {
 			if (StringUtils.isBlank(line))
 			{
@@ -93,7 +92,6 @@ public class ConversionService
 	}
 	
 	private void processVerseLines(List<String> verseLines, AtomicInteger verseNo, List<VerseType> verses)
-			throws JAXBException
 	{
 		// blank line? commit last group if needed
 		if (!CollectionUtils.isEmpty(verseLines))

@@ -1,11 +1,17 @@
 package org.holdren.olpsc;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.when;
+import info.openlyrics.namespace._2009.song.Song;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.stubbing.Answer;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringWriter;
@@ -14,20 +20,11 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.runners.MockitoJUnitRunner;
-import org.mockito.stubbing.Answer;
-
-import info.openlyrics.namespace._2009.song.Song;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyObject;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ConversionServiceTest
@@ -40,19 +37,11 @@ public class ConversionServiceTest
 	
 	@Mock 
 	private Marshaller marshaller;
-	
-	@Before
-	public void setUp() throws JAXBException
-	{
-		//conversionService = new ConversionService();
-		//conversionService.init();
-	}
-	
+
 	@Test
 	public void givenSongWhenConvertToXmlStringThenReturnXmlString() throws JAXBException
 	{
 		when(songJaxbContext.createMarshaller()).thenReturn(marshaller);
-		//when(marshaller.marshal(anyObject(), any(Writer.class));
 		doAnswer(new Answer<Void>() {
 
 			@Override
@@ -63,7 +52,7 @@ public class ConversionServiceTest
 				sw.write("expected string");
 				return null;
 			}
-		}).when(marshaller).marshal(anyObject(), any(Writer.class));
+		}).when(marshaller).marshal(any(), any(Writer.class));
 		String converted = conversionService.convert(new Song());
 		
 		assertThat(converted).as("got back expected string").isEqualTo("expected string");
