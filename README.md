@@ -11,7 +11,7 @@ Simply pull down the project and run the gradle wrapper.
 
 ### Prerequisites
 
-You'll need a copy of Java 8 installed on your host.
+You'll need a copy of Java 8 installed on your host.  You'll also need to clone the [openlyricj](https://github.com/bswtsermons/openlyricj) repo in the same directory as this one.
 
 ## Deployment
 
