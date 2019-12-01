@@ -2,6 +2,7 @@ package org.holdren.olpsc.cs;
 
 import com.dropbox.core.DbxException;
 import com.dropbox.core.v2.DbxClientV2;
+import com.dropbox.core.v2.files.WriteMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +20,7 @@ public class DropBoxCloudStorageService implements CloudStorageService
     {
         try
         {
-            dbxClient.files().uploadBuilder(path).uploadAndFinish(inputStream);
+            dbxClient.files().uploadBuilder(path).withMode(WriteMode.OVERWRITE).uploadAndFinish(inputStream);
         }
         catch (DbxException | IOException e)
         {
